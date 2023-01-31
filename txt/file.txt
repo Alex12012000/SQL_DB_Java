@@ -1,0 +1,6 @@
+Marca: Dell; RAM: 8gb; CPU: i7; Schermo: 12.5; GPU: GeForce 3090; Prezzo: 800;
+Marca: Lenovo; RAM: 8gb; CPU: i7; Schermo: 12.6; GPU: GeForce 3060; Prezzo: 750;
+Marca: Acer; RAM: 16gb; CPU: i9; Schermo: 15.6; GPU: GeForce 2070; Prezzo: 1200;
+Marca: Asus; RAM: 32gb; CPU: Xenon Gold; Schermo: 17.3; GPU: GeForce 4090; Prezzo: 1600;
+Marca: HP; RAM: 8gb; CPU: AMD Rayzen 7; Schermo: 15.6; GPU: AMD 6600; Prezzo: 600;
+Marca: Huawei; RAM: 8gb; CPU: i7; Schermo: 12.5; GPU: GeForce 3060; Prezzo: 700;
