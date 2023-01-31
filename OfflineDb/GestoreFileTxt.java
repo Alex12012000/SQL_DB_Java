@@ -1,3 +1,4 @@
+package OfflineDb;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class GestoreFileTxt{
 
     public void read(){
         try {       
-              filein = new FileReader("prova.txt");
+              filein = new FileReader("file.txt");
               int next;
             do {
                 next = filein.read(); // legge il prossimo carattere
@@ -88,9 +89,6 @@ public class GestoreFileTxt{
           System.out.println(e);
       }
     
-      com.forEach(el -> System.out.println(el.toString()));
-
-
         return com;
     }
 }

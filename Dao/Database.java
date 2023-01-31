@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class Database {
 
-    private static String jdbcURL = "";
-    private static String jdbcUtente = "";
-    private static String jdbcPassWord = "";
+    private static String jdbcURL = "jdbc:mysql://127.0.0.1:3306/mydb";
+    private static String jdbcUtente = "root";
+    private static String jdbcPassWord = "@AtonSQL1234";
 
 
     public Database() {

@@ -11,7 +11,7 @@ public class VistaUtente{
     Scanner scan;
 
        
-    public VistaUtente(){
+    public VistaUtente()  throws SQLException {
         scan = new Scanner(System.in);
         this.CDAO = new ComputerDAOImpl();     
         menu();
@@ -26,7 +26,7 @@ public class VistaUtente{
      * nella funzione:
      * swich che indirizza nei vari menu 
     */
-    public void menu() {
+    public void menu()  throws SQLException {
         //da implementare
         System.out.println("-----menu-----\n"
                             + " 1) ricerca \n"
@@ -77,7 +77,7 @@ public class VistaUtente{
      * descrizione -> mostra i modi possibili di ricercare un computer 
      * e restituisce il computer ricercato 
     */
-    public void menuRicerca(){
+    public void menuRicerca() throws SQLException {
         //da implementare
         System.out.println("-----menu ricerca-----\n"
                             + " 1) ricerca per marca \n"
@@ -90,14 +90,14 @@ public class VistaUtente{
                 System.out.println("inserire marca da cercare");
                 String marca = scan.nextLine();
                 List<Computer> computerMarca = CDAO.cercaPerMarca(marca); 
-                computerMarca.forEach(el -> System.out.println(el.toString());
+                computerMarca.forEach(el -> System.out.println(el.toString()));
                 menu();        
                 break;
             case 2:
                 System.out.println("inserire nome");
                 String nome = scan.nextLine();
-                List<Computer> computerNome = CDAO.cercaPerMarca(marca); 
-                computerNome.forEach(el -> System.out.println(el.toString());
+                List<Computer> computerNome = CDAO.cercaPerMarca(nome); 
+                computerNome.forEach(el -> System.out.println(el.toString()));
                 menu();
                 break;
             default:
@@ -160,7 +160,7 @@ public class VistaUtente{
      *
      *  descrizione -> richiede l'id, se non si conosce l'id avvia il menu di ricerca
      */
-    public void menuElimina()throws SQLException{
+    public void menuElimina() throws SQLException {
         List<Computer> comp= CDAO.vediTutti();
         comp.forEach(el ->  System.out.println(el.toString()));
         System.out.println(" inserire l'id del computer da eliminare");
