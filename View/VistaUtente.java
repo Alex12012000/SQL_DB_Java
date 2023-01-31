@@ -28,12 +28,12 @@ public class VistaUtente{
     */
     public void menu()  throws SQLException {
         //da implementare
-        System.out.println("-----menu-----\n"
-                            + " 1) ricerca \n"
-                            + " 2) inserisci nuovo computer nel DB\n"
-                            + " 3) cancella computer dal DB\n"
-                            + " 4) modifica computer nel DB\n"
-                            + " 0) esci  " );
+        System.out.println("-----menu-----\n\n"
+                            + " 1) Ricerca \n"
+                            + " 2) Inserisci nuovo computer nel DB\n"
+                            + " 3) Cancella computer dal DB\n"
+                            + " 4) Modifica computer nel DB\n"
+                            + " 0) Esci  \n" );
         int selezione = ritornaScelta();
 
         //da implementare
@@ -66,7 +66,7 @@ public class VistaUtente{
                 return selezione;
                 
             }else{
-                System.out.println("prego inserire un numero esistente nel menu");
+                System.out.println("Prego inserire un numero esistente nel menu");
             }
         }
     }
@@ -79,25 +79,25 @@ public class VistaUtente{
     */
     public void menuRicerca() throws SQLException {
         //da implementare
-        System.out.println("-----menu ricerca-----\n"
-                            + " 1) ricerca per marca \n"
-                            + " 2) ricerca per nome");
+        System.out.println("-----Menu Ricerca-----\n\n"
+                            + " 1) Ricerca per marca \n"
+                            + " 2) Ricerca per prezzo\n");
         int selezione = ritornaScelta();
 
         //da implementare
         switch (selezione) {
             case 1:
-                System.out.println("inserire marca da cercare");
+                System.out.println("Inserire marca da cercare\n");
                 String marca = scan.nextLine();
                 List<Computer> computerMarca = CDAO.cercaPerMarca(marca); 
                 computerMarca.forEach(el -> System.out.println(el.toString()));
                 menu();        
                 break;
             case 2:
-                System.out.println("inserire nome");
-                String nome = scan.nextLine();
-                List<Computer> computerNome = CDAO.cercaPerMarca(nome); 
-                computerNome.forEach(el -> System.out.println(el.toString()));
+                System.out.println("Inserire il prezzo \n");
+                double prezzo = scan.nextDouble();
+                List<Computer> computersPrezzo = CDAO.cercaPerPrezzo(prezzo); 
+                computersPrezzo.forEach(el -> System.out.println(el.toString()));
                 menu();
                 break;
             default:
@@ -112,31 +112,33 @@ public class VistaUtente{
      *  al database chiedendo i parametri al utente
      */
     public void creaNuovoComputer() throws SQLException {
-        System.out.println("inserire la marca ");
+        System.out.println("\nInserire la marca");
         String marca = scan.next();
 
-        System.out.println("inserire la ram ");
+        System.out.println("Inserire la ram ");
         String ram = scan.next();
 
-        System.out.println("inserire la CPU");
+        System.out.println("Inserire la CPU");
         String cpu = scan.next();
 
-        System.out.println("inserire le dimenzioni dello schermo");
+        System.out.println("Inserire le dimensioni dello schermo");
         double schermo = 0.00;
         while (true) {
             if(scan.hasNextDouble()){
                 schermo = scan.nextDouble();
+                scan.nextLine();
                 break;
             }else{
                 System.out.println("è accettabile solo un numero con la virgola, usare il punto");
+                scan.nextLine();
             }
         }
 
         System.out.println("Inserire la GPU");
-        String gpu = scan.next();
+        String gpu = scan.nextLine();
 
 
-        System.out.println("inserire prezzo");
+        System.out.println("Inserire prezzo");
         double prezzo = 0.00;
         while (true) {
             if(scan.hasNextDouble()){
@@ -144,6 +146,7 @@ public class VistaUtente{
                 break;
             }else{
                 System.out.println("è accettabile solo un numero con la virgola, usare il punto");
+                scan.nextLine();
             }
         }
         scan.nextLine();
@@ -151,6 +154,11 @@ public class VistaUtente{
         Computer comp = new Computer(marca,ram,cpu,schermo,gpu,prezzo);
 
         CDAO.inserisciPc(comp);
+        System.out.println("\n\n--------------------------------");
+        System.out.println("Inserimento riusciuto\n");
+
+       System.out.println(comp.toString());
+
 
     }
 
@@ -162,19 +170,20 @@ public class VistaUtente{
      */
     public void menuElimina() throws SQLException {
         List<Computer> comp= CDAO.vediTutti();
-        comp.forEach(el ->  System.out.println(el.toString()));
-        System.out.println(" inserire l'id del computer da eliminare");
+        comp.forEach(el ->  System.out.println("\n" + el.toString() + el.getPcId()));
+        System.out.println("Inserire l'id del computer da eliminare");
         int scelta = 0;
 
         if (scan.hasNextInt()) {
             scelta = scan.nextInt();
             scan.nextLine();
         }else{
-            System.out.println("valore inserito non valido riprovare");
+            System.out.println("Valore inserito non valido riprovare");
             menuElimina();
         }
 
-        CDAO.eliminaPc(comp.get(scelta));
+        CDAO.eliminaPc(comp.get(scelta - 1));
+        comp.forEach(el ->  System.out.println("\n" + el.toString()));
     }
 
 

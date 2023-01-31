@@ -23,13 +23,13 @@ public class ComputerDAOImpl implements ComputerDAO {
         Connection con = Database.getConnection();
         List<Computer> computers = new ArrayList<>();
 
-        String sql = "SELECT id, Marca, Ram, CPU, Schermo, GPU, Prezzo FROM computers WHERE Marca=?";
+        String sql = "SELECT * FROM computers WHERE Marca=?";
         PreparedStatement ps = con.prepareStatement(sql);  
         ps.setString(1, brand);
 
         ResultSet rs = ps.executeQuery();
 
-        if(rs.next()) {
+        while(rs.next()) {
             int oid = rs.getInt("id");
             String marca = rs.getString("Marca");
             String ram = rs.getString("Ram");
@@ -52,20 +52,20 @@ public class ComputerDAOImpl implements ComputerDAO {
     * funzione che dato un prezzo ritorna una lista di elementi
     * pari o superiore al prezzo richiesto
     *
-    *
-    * */
+    */
 
     @Override
-    public List<Computer> cercaPerPrezzo(int prezzo) throws SQLException {
+    public List<Computer> cercaPerPrezzo(double prezzo) throws SQLException {
+
         Connection con = Database.getConnection();
         List<Computer> computers = new ArrayList<>();
-        String sql = "SELECT id, Marca, Ram, CPU, Schermo, GPU, Prezzo FROM computers WHERE Prezzo >= ?";
+        String sql = "SELECT * FROM computers WHERE Prezzo >= ?";
         PreparedStatement ps = con.prepareStatement(sql);  
         ps.setDouble(1, prezzo);
 
         ResultSet rs = ps.executeQuery();
 
-        if(rs.next()) {
+        while(rs.next()) {
             int oid = rs.getInt("id");
             String marca = rs.getString("Marca");
             String ram = rs.getString("Ram");
@@ -83,12 +83,12 @@ public class ComputerDAOImpl implements ComputerDAO {
     }
 
     /* 
+    *
     * @param pc (Computer)
     * 
     * funzione che si occupa di aggiungere un computer al db
     *
-    *
-    * */
+    */
     
     @Override
     public int inserisciPc(Computer pc) throws SQLException {
@@ -172,7 +172,7 @@ public class ComputerDAOImpl implements ComputerDAO {
     @Override
     public List<Computer> vediTutti() throws SQLException {
         Connection conn = Database.getConnection();
-        String sql = "SELECT * FROM COMPUTER";
+        String sql = "SELECT * FROM computers";
         
         List<Computer> computers = new ArrayList<>();
 
@@ -180,6 +180,7 @@ public class ComputerDAOImpl implements ComputerDAO {
         ResultSet rs = stmt.executeQuery(sql);
 
         while(rs.next()) {
+            int id = rs.getInt("id");
             String marca = rs.getString("Marca");
             String ram = rs.getString("Ram");
             String cpu = rs.getString("CPU");
@@ -188,7 +189,7 @@ public class ComputerDAOImpl implements ComputerDAO {
             double prezzoScelto = rs.getDouble("Prezzo");
 
             Computer computer = new Computer(marca, ram, cpu, schermo, gpu, prezzoScelto);
-
+            computer.setPcId(id);
             computers.add(computer);
         }
 

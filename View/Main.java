@@ -12,6 +12,7 @@ import model.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        
+        VistaUtente ui = new VistaUtente();
+        ui.menu();
     }
 }

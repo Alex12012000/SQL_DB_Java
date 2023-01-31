@@ -15,7 +15,7 @@ public interface BaseDAO<T> {
 
 
     public List<T> cercaPerMarca(String brand) throws SQLException;
-    public List<T> cercaPerPrezzo(int prezzo) throws SQLException;
+    public List<T> cercaPerPrezzo(double prezzo) throws SQLException;
     public int inserisciPc(T pc) throws SQLException;
     public int modificaPc(T pc) throws SQLException; 
     public int eliminaPc(T pc) throws SQLException; 

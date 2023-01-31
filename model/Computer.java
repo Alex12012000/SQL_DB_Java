@@ -82,7 +82,6 @@ public class Computer {
     @Override
     public String toString() {
             return 
-                    "pcId : '" + getPcId() + "'\n " + 
                     "Marca: '" + getMarca() + "'\n " + 
                     "Ram: '" + getRam() + "'\n " + 
                     "Cpu: '" + getCpu() + "'\n " + 
